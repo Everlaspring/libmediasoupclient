@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.15)
 
 project(mediasoupclient LANGUAGES CXX)
 
@@ -16,6 +16,8 @@ configure_file (
 # C++ standard requirements.
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 # Project options.
 option(MEDIASOUPCLIENT_BUILD_TESTS "Build unit tests" OFF)
@@ -130,7 +132,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 # Public (interface) dependencies.
 target_link_libraries(${PROJECT_NAME} PUBLIC
 	sdptransform
-	${LIBWEBRTC_BINARY_PATH}/libwebrtc${CMAKE_STATIC_LIBRARY_SUFFIX}
+	${LIBWEBRTC_BINARY_PATH}/webrtc${CMAKE_STATIC_LIBRARY_SUFFIX}
 )
 
 # Compile definitions for libwebrtc.
